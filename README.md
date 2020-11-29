@@ -23,31 +23,43 @@ The main purpose of this image is to be used to show data from a [Home Assistant
 | ChronoGraf   | 1.8.6   |
 | Grafana      | 7.2.0   |
 
+## Build
+docker build -t openwrt_monitor .
+
 ## Quick Start
 
 To start the container with persistence you can use the following:
 
 ```sh
 docker run -d \
-  --name docker-influxdb-grafana \
+  --name openwrt_monitor \
   -p 3003:3003 \
   -p 3004:8083 \
   -p 8086:8086 \
-  -v /path/for/influxdb:/var/lib/influxdb \
-  -v /path/for/grafana:/var/lib/grafana \
-  philhawthorne/docker-influxdb-grafana:latest
+  -p 25826:25826/udp \
+  -v /Users/Jacob/Docker/docker-influxdb-grafana/var/lib/influxdb:/var/lib/influxdb \
+  -v /Users/Jacob/Docker/docker-influxdb-grafana/var/lib/grafana:/var/lib/grafana \
+  openwrt_monitor:latest
+
+docker stop openwrt_monitor
+container ls -al
+CONTAINER ID        IMAGE                    COMMAND             CREATED             STATUS                      PORTS               NAMES
+80c2a72a19a5        openwrt_monitor:latest   "/run.sh"           48 minutes ago      Exited (0) 27 seconds ago                       openwrt_monitor
+
+docker container rm 80c2a72a19a5
+
 ```
 
 To stop the container launch:
 
 ```sh
-docker stop docker-influxdb-grafana
+docker stop openwrt_monitor
 ```
 
 To start the container again launch:
 
 ```sh
-docker start docker-influxdb-grafana
+docker start openwrt_monitor
 ```
 
 ## Mapped Ports
@@ -63,6 +75,7 @@ Host		Container		Service
 
 ```sh
 docker exec -it <CONTAINER_ID> bash
+docker exec -it openwrt_monitor bash
 ```
 
 ## Grafana
