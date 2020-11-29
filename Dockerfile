@@ -67,6 +67,8 @@ COPY bash/profile .profile
 
 # Configure InfluxDB
 COPY influxdb/influxdb.conf /etc/influxdb/influxdb.conf
+# Copy Openwrt collectd database
+COPY influxdb/types.db /usr/local/share/collectd/types.db
 
 # Configure Grafana
 COPY grafana/grafana.ini /etc/grafana/grafana.ini
