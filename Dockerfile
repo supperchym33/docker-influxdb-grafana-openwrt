@@ -13,7 +13,7 @@ ENV GRAFANA_VERSION=7.2.0
 ENV GF_DATABASE_TYPE=sqlite3
 
 # Fix bad proxy issue
-COPY system/99fixbadproxy /etc/apt/apt.conf.d/99fixbadproxy
+#COPY system/99fixbadproxy /etc/apt/apt.conf.d/99fixbadproxy
 
 WORKDIR /root
 
